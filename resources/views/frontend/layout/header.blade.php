@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Veehaagate</title>
+
 	<link href="{{asset("frontend/css/bootstrap.min.css")}}" rel="stylesheet">
 	<link href="{{asset("frontend/css/global.css")}}" rel="stylesheet">
 	<link href="{{asset("frontend/css/index.css")}}" rel="stylesheet">
@@ -13,6 +14,12 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
 	<script src="{{asset("frontend/js/jquery-2.1.1.min.js")}}"></script>
     <script src="{{asset("frontend/js/bootstrap.min.js")}}"></script>
+
+    <!-- Correct Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
   </head>
 
 <body>
@@ -31,7 +38,7 @@
 	</div>
 	<div class="col-sm-10">
 	 <div class="header_1r clearfix">
-	   {{-- <div class="header_1ri border_none clearfix">
+	   <div class="header_1ri border_none clearfix">
 	     <div class="input-group">
 					<input type="text" class="form-control" placeholder="Search" style="width: 350px">
 					<span class="input-group-btn">
@@ -39,42 +46,7 @@
 							<i class="fa fa-search"></i></button>
 					</span>
 				 </div>
-	   </div> --}}
-       <ul class="nav navbar-nav" style="margin-left: 40px;">
-
-        <li><a class="m_tag active_tab" href="{{url('/')}}">Home</a></li>
-        {{-- <li class="dropdown">
-              <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Product</a>
-              <ul class="dropdown-menu drop_3" role="menu">
-                <li><a href="product.html">Product</a></li>
-                <li><a class="border_none" href="detail.html">Product Detail</a></li>
-              </ul>
-            </li> --}}
-            @php
-            $products = \App\Models\Product::all();
-          @endphp
-            <li class="dropdown">
-                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Product <span class="caret"></span></a>
-                <ul class="dropdown-menu drop_3" role="menu">
-                    @foreach ($products as $product)
-                        <li><a href="{{ route('product.show', $product->product_id) }}">{{ $product->name }}</a></li>
-                    @endforeach
-                </ul>
-            </li>
-
-        {{-- <li class="dropdown">
-              <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Blog<span class="caret"></span></a>
-              <ul class="dropdown-menu drop_3" role="menu">
-                <li><a href="blog.html">Blog</a></li>
-                <li><a class="border_none" href="blog_detail.html">Blog Detail</a></li>
-              </ul>
-            </li> --}}
-
-        <li><a class="m_tag" href="{{url('/Aboutus')}}">About Us</a></li>
-        <li><a class="m_tag" href="{{url('/Contactus')}}">Contact</a></li>
-
-
-    </ul>
+	   </div>
 
 
        <div class="header_1ri clearfix" style="margin-left: 50px;">
@@ -119,8 +91,7 @@
         @endauth
       </div>
 
-
-      <div class="header_1ri border_none clearfix " style="position: relative;">
+      {{-- <div class="header_1ri border_none clearfix " style="position: relative;">
         <span class="span_1">
             <a class="col_1" href="#">
                 <i class="glyphicon glyphicon-shopping-cart"></i>
@@ -130,20 +101,106 @@
         <h5 class="mgt">
             <a href="{{ route('cart.view') }}">My <br> Cart</a>
         </h5>
+    </div> --}}
+
+    <div class="header_1ri border_none clearfix" style="position: relative;">
+        <span class="span_1">
+            <a class="col_1" href="javascript:void(0);" onclick="checkCartItems()">
+                <i class="glyphicon glyphicon-shopping-cart"></i>
+                <span id="cart-badge" class="badge rounded-pill bg-danger" style="position: absolute; top: -5px; right: -0px;">{{ $totalItems }}</span>
+            </a>
+        </span>
+        <h5 class="mgt">
+            <a href="javascript:void(0);" onclick="checkCartItems()">My <br> Cart</a>
+        </h5>
     </div>
 
+    <!-- Modal -->
+<div class="modal fade" id="emptyCartModal" tabindex="-1" role="dialog" aria-labelledby="emptyCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="emptyCartModalLabel">Cart is Empty</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Your cart is empty! Please add items to the cart before proceeding.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
+    <script>
+        function checkCartItems() {
+            var totalItems = parseInt($("#cart-badge").text());  // Get the updated badge value
 
-	   {{-- <div class="header_1ri border_none clearfix">
-	     <span class="span_1"><a class="col_1" href="#"><i class="fa fa-heart-o"></i></a></span>
-		 <h5 class="mgt"><a href="#">My <br> Wishlist (0)</a></h5>
-	   </div> --}}
+            if (totalItems == 0) {
+                // Show alert if cart is empty
+                // alert("Your cart is empty! Please add items to cart.");
+                console.log("Attempting to show empty cart modal...");
+                $('#emptyCartModal').modal('show');
+
+                // Redirect to homepage
+                // window.location.href = "{{ url('/') }}";
+            } else {
+                // Redirect to cart view if cart has items
+                window.location.href = "{{ route('cart.view') }}";
+            }
+        }
+    </script>
 
 	 </div>
 	</div>
    </div>
+
+   <ul class="nav navbar-nav" style="margin-left: 40px;  margin-top:10px;">
+
+    <li><a class="m_tag active_tab" href="{{url('/')}}">Home</a></li>
+    {{-- <li class="dropdown">
+          <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Product</a>
+          <ul class="dropdown-menu drop_3" role="menu">
+            <li><a href="product.html">Product</a></li>
+            <li><a class="border_none" href="detail.html">Product Detail</a></li>
+          </ul>
+        </li> --}}
+        @php
+        $products = \App\Models\Product::all();
+      @endphp
+      @php
+      $categories = \App\Models\Category::all();
+    @endphp
+        <li class="dropdown">
+            <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Product <span class="caret"></span></a>
+            <ul class="dropdown-menu drop_3" role="menu">
+                @foreach ($categories as $category)
+                <li><a href="{{ route('category.show', $category->category_id) }}">{{ $category->name }}</a></li>
+            @endforeach
+
+            </ul>
+        </li>
+
+    {{-- <li class="dropdown">
+          <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Blog<span class="caret"></span></a>
+          <ul class="dropdown-menu drop_3" role="menu">
+            <li><a href="blog.html">Blog</a></li>
+            <li><a class="border_none" href="blog_detail.html">Blog Detail</a></li>
+          </ul>
+        </li> --}}
+
+    <li><a class="m_tag" href="{{url('/Aboutus')}}">About Us</a></li>
+    <li><a class="m_tag" href="{{url('/Contactus')}}">Contact</a></li>
+
+
+</ul>
+
   </div>
  </div>
 </section>
+
 

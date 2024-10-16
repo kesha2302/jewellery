@@ -17,49 +17,6 @@ class CheckoutController extends Controller
         return view ('frontend.Checkoutpage');
     }
 
-    // public function checkoutSubmit(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required|string',
-    //         'contact_number' => 'required|string',
-    //         'email' => 'required|email',
-    //         'pincode' => 'required|string',
-    //         'city' => 'required|string',
-    //         'state' => 'required|string',
-    //         'address' => 'required|string',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return redirect()->back()
-    //                          ->withErrors($validator)
-    //                          ->withInput();
-    //     }
-
-    //     $name = $request->input('name');
-    //     $contact_number = $request->input('contact_number');
-    //     $email = $request->input('email');
-    //     $pincode = $request->input('pincode');
-    //     $city = $request->input('city');
-    //     $state = $request->input('state');
-    //     $address = $request->input('address');
-
-    //         $request->session()->put('checkout_data', [
-    //             'name' => $name,
-    //             'contact_number' => $contact_number,
-    //             'email' => $email,
-    //             'pincode' => $pincode,
-    //             'city' => $city,
-    //             'state' => $state,
-    //             'address' => $address,
-    //         ]);
-
-    //         Log::info('Checkout data saved in session:', [
-    //             'checkout_data' => $request->session()->get('checkout_data'),
-    //         ]);
-
-    //         return response()->json(['message' => 'Order details saved. Proceed to payment.']);
-
-    // }
     public function checkoutSubmit(Request $request)
     {
         $validator = Validator::make($request->all(), [

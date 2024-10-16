@@ -14,7 +14,9 @@ class CartController extends Controller
     public function cart()
     {
         $cart = session('cart', []); // Assuming you are storing cart items in session
+
         $totalAmount = 0;
+
 
         foreach ($cart as $item) {
             $itemTotal = $item['price'] * $item['quantity'];
@@ -32,34 +34,7 @@ class CartController extends Controller
         return view('frontend.cartpage',compact('cart', 'totalAmount'));
     }
 
-//     public function addToCart(Request $request)
-// {
-//     $product = Product::find($request->id);
 
-//     if (!$product) {
-//         return response()->json(['message' => 'product not found'], 404);
-//     }
-
-
-//     $cart = Session::get('cart', []);
-
-//     if (isset($cart[$request->id])) {
-//         // Update the quantity if the product is already in the cart
-//         $cart[$request->id]['quantity'] += $request->quantity;
-//     } else {
-//         $cart[$request->id] = [
-//             'product_id' => $product->product_id,
-//             'image'=>$product->image,
-//             'name' => $product->name,
-//             'price' => $product->price,
-//             'quantity' => $request->quantity,
-//         ];
-//     }
-
-//     Session::put('cart', $cart);
-
-//     return response()->json(['message' => 'product added to cart successfully!']);
-// }
 public function addToCart(Request $request)
 {
     $product = Product::find($request->id);
@@ -90,6 +65,10 @@ public function addToCart(Request $request)
     Session::put('cart', $cart);
 
     $totalItems = array_sum(array_column($cart, 'quantity'));
+
+    // if ($totalItems == 0) {
+    //     return response()->json(['message' => 'Your cart is empty!'], 200);
+    // }
 
     return response()->json(['message' => 'Product added to cart successfully!','totalItems' => $totalItems ]);
 }

@@ -78,8 +78,10 @@ class HomeController extends Controller
 
     public function productdropdown()
     {
-        $products = Product::with('category', 'subcategory')->get();
-        return view('frontend.layout.header', compact('products'));
+        // $products = Product::with('category', 'subcategory')->get();
+        // return view('frontend.layout.header', compact('products'));
+        $categories = Category::all();
+        return view('frontend.layout.header', compact('categories'));
     }
 
     public function categoryfooter()
@@ -87,6 +89,18 @@ class HomeController extends Controller
         $categories = Category::all();
 
         return view('frontend.layout.footer', compact('categories'));
+    }
+
+    public function categoryshow($id)
+    {
+        // Fetch the category by ID
+        $categories = Category::findOrFail($id);
+
+        // Fetch products related to the category
+        $products = Product::where('category_id', $id)->get();
+
+        // Return the view with the category and its products
+        return view('frontend.allcategoryproduct', compact('categories', 'products'));
     }
 
 

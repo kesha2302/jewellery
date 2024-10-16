@@ -44,6 +44,7 @@ Route::post('/Feedbackform', [HomeController::class, 'feedbackform']);
 Route::get('/explorenewarrivals', [HomeController::class, 'explorenewarrivals']);
 Route::get('/productdropdown', [HomeController::class, 'productdropdown']);
 Route::get('/footer', [HomeController::class, 'categoryfooter']);
+Route::get('/category/{id}', [HomeController::class, 'categoryshow'])->name('category.show');
 
 // Crat Details
 Route::get('/cart',[CartController::class,'cart'])->name('cart.view');
