@@ -52,10 +52,6 @@
        <div class="header_1ri clearfix" style="margin-left: 50px;">
         @auth
 
-        {{-- <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-dark text-center" style="margin-left: 20px; background-color: #d93d3d;"><b>Logout</b></button>
-        </form> --}}
         <div class="header_1ri border_none clearfix">
             <span class="span_1">
                 <a class="col_1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -91,23 +87,11 @@
         @endauth
       </div>
 
-      {{-- <div class="header_1ri border_none clearfix " style="position: relative;">
-        <span class="span_1">
-            <a class="col_1" href="#">
-                <i class="glyphicon glyphicon-shopping-cart"></i>
-                <span class="badge rounded-pill bg-danger" style="position: absolute; top: -5px; right: -0px;">{{ $totalItems }}</span>
-            </a>
-        </span>
-        <h5 class="mgt">
-            <a href="{{ route('cart.view') }}">My <br> Cart</a>
-        </h5>
-    </div> --}}
-
     <div class="header_1ri border_none clearfix" style="position: relative;">
         <span class="span_1">
             <a class="col_1" href="javascript:void(0);" onclick="checkCartItems()">
                 <i class="glyphicon glyphicon-shopping-cart"></i>
-                <span id="cart-badge" class="badge rounded-pill bg-danger" style="position: absolute; top: -5px; right: -0px;">{{ $totalItems }}</span>
+                <span id="cart-badge" class="badge rounded-pill bg-danger" style="position: absolute; top: -5px; right: -0px; display: {{ $totalItems > 0 ? 'inline' : 'none' }};">{{ $totalItems }}</span>
             </a>
         </span>
         <h5 class="mgt">
@@ -136,39 +120,35 @@
   </div>
 
 
-    <script>
-        function checkCartItems() {
-            var totalItems = parseInt($("#cart-badge").text());  // Get the updated badge value
-
-            if (totalItems == 0) {
-                // Show alert if cart is empty
-                // alert("Your cart is empty! Please add items to cart.");
-                console.log("Attempting to show empty cart modal...");
-                $('#emptyCartModal').modal('show');
-
-                // Redirect to homepage
-                // window.location.href = "{{ url('/') }}";
-            } else {
-                // Redirect to cart view if cart has items
-                window.location.href = "{{ route('cart.view') }}";
-            }
-        }
-    </script>
 
 	 </div>
 	</div>
    </div>
 
-   <ul class="nav navbar-nav" style="margin-left: 40px;  margin-top:10px;">
+
+  </div>
+ </div>
+</section>
+
+<section id="menu" class="clearfix cd-secondary-nav">
+	<nav class="navbar nav_t">
+		<div class="container">
+		    <div class="navbar-header page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+                {{-- <h2 style="margin-top: 28px;"><a class="col_1" href="{{url('/')}}">Veehaagate</a></h2> --}}
+			</div>
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<ul class="nav navbar-nav" style="margin-left: 40px;  margin-top:10px;">
 
     <li><a class="m_tag active_tab" href="{{url('/')}}">Home</a></li>
-    {{-- <li class="dropdown">
-          <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Product</a>
-          <ul class="dropdown-menu drop_3" role="menu">
-            <li><a href="product.html">Product</a></li>
-            <li><a class="border_none" href="detail.html">Product Detail</a></li>
-          </ul>
-        </li> --}}
+
         @php
         $products = \App\Models\Product::all();
       @endphp
@@ -185,13 +165,7 @@
             </ul>
         </li>
 
-    {{-- <li class="dropdown">
-          <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Blog<span class="caret"></span></a>
-          <ul class="dropdown-menu drop_3" role="menu">
-            <li><a href="blog.html">Blog</a></li>
-            <li><a class="border_none" href="blog_detail.html">Blog Detail</a></li>
-          </ul>
-        </li> --}}
+
 
     <li><a class="m_tag" href="{{url('/Aboutus')}}">About Us</a></li>
     <li><a class="m_tag" href="{{url('/Contactus')}}">Contact</a></li>
@@ -199,8 +173,30 @@
 
 </ul>
 
-  </div>
- </div>
+</div>
+<!-- /.navbar-collapse -->
+</div>
+<!-- /.container-fluid -->
+</nav>
+
 </section>
 
+<script>
+    function checkCartItems() {
+        var totalItems = parseInt($("#cart-badge").text());  // Get the updated badge value
+
+        if (totalItems == 0) {
+            // Show alert if cart is empty
+            // alert("Your cart is empty! Please add items to cart.");
+            console.log("Attempting to show empty cart modal...");
+            $('#emptyCartModal').modal('show');
+
+            // Redirect to homepage
+            // window.location.href = "{{ url('/') }}";
+        } else {
+            // Redirect to cart view if cart has items
+            window.location.href = "{{ route('cart.view') }}";
+        }
+    }
+</script>
 
