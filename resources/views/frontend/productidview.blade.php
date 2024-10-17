@@ -1,4 +1,4 @@
-{{-- @extends('frontend.layout.main')
+@extends('frontend.layout.main')
 
 @section('main-container')
 
@@ -124,8 +124,9 @@
         @endif
     }
 </script>
-@endsection --}}
-<!DOCTYPE html>
+@endsection
+
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -133,19 +134,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Veehaagate</title>
 
-    {{-- <link href="{{asset('frontend/css/bootstrap.min.css')}}" rel="stylesheet"> --}}
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
-    <link href="{{asset('frontend/css/global.css')}}" rel="stylesheet">
-    <link href="{{asset('frontend/css/index.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/font-awesome.min.css')}}" />
+    <!-- Bootstrap CSS -->
+
+    <link href="{{ asset('frontend/css/global.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/index.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/font-awesome.min.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" >
 
-    <!-- jQuery, Popper, and Bootstrap Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -155,13 +152,30 @@
 
 @if(session('success'))
 <script>
-    $(document).ready(function(){
-        var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
-        $('#modalMessage').text("{{ session('success') }}");
-        myModal.show();
+    $(document).ready(function() {
+        $('#modalMessage .modal-body').text("{{ session('success') }}");
+        $('#modalMessage').modal('show');
     });
 </script>
 @endif
+
+<!-- Modal -->
+<div class="modal fade" id="modalMessage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalMessageLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalMessageLabel">Notification</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container mt-4">
     <div class="container h-100 py-3" style="background-color: #eee; margin-bottom: 20px;">
@@ -224,23 +238,12 @@
     </div>
 </div>
 
-<!-- Modal for success/error messages -->
-<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="messageModalLabel">Message</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="modalMessage">
-                <!-- The message will be inserted here via JavaScript -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 
 <script>
     // Quantity control functionality
@@ -267,7 +270,6 @@
 
     // Add to Cart button functionality
     function addToCart(productId) {
-
         @if(auth()->check())
             let quantity = $('#quantity').val();
 
@@ -280,35 +282,30 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    // Initialize the Bootstrap modal
-                    var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
-                    $('#modalMessage').text(response.message); // Insert success message
-                    myModal.show(); // Show modal
+                    console.log(response);
 
-                    // Update cart badge
+                    $('#modalMessage .modal-body').text(response.message);
+                    console.log("Modal text updated:", response.message);
+
+                    $('#modalMessage').modal('show');
+                    console.log("Modal should now be displayed");
+
                     $('.badge').text(response.totalItems);
                 },
                 error: function(xhr) {
-                    // Initialize the Bootstrap modal
-                    var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
-                    $('#modalMessage').text('Error: ' + xhr.responseJSON.message); // Insert error message
-                    myModal.show(); // Show modal
+                    $('#modalMessage .modal-body').text('Error: ' + xhr.responseJSON.message);
+                    $('#modalMessage').modal('show');
+                    console.log("Modal should now display an error message");
                 }
             });
         @else
-            // Initialize the Bootstrap modal
-            var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
-            $('#modalMessage').text('Please log in to add items to your cart.'); // Insert login prompt
-            myModal.show(); // Show modal
+        $('#modalMessage .modal-body').text('Please log in to add items to your cart.');
+        $('#modalMessage').modal('show');
+        console.log("Modal should now display a login message");
         @endif
     }
 </script>
-
 @endsection
+
 </body>
-</html>
-
-
-
-
-
+</html> --}}

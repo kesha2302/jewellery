@@ -60,7 +60,7 @@
               </span>
 
             <h5 class="mgt dropdown">
-              <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My<br>Profile </a>
+              <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile </a>
               <ul class="dropdown-menu">
                 <li><a href="{{url('/edit-profile')}}">Profile</a></li>
                 <li><a href="{{url('/orderhistory')}}">Order History</a></li>
@@ -73,12 +73,12 @@
         @else
         <span class="span_1">
             <a class="col_1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-user"></i>
+              <i class="fa fa-user "></i>
             </a>
           </span>
 
         <h5 class="mgt dropdown">
-          <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My <br>Account </a>
+          <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account </a>
           <ul class="dropdown-menu">
             <li><a href="{{url('/Login')}}">Login</a></li>
             <li><a href="{{url('/register')}}">Sign Up</a></li>
@@ -95,7 +95,7 @@
             </a>
         </span>
         <h5 class="mgt">
-            <a href="javascript:void(0);" onclick="checkCartItems()">My <br> Cart</a>
+            <a href="javascript:void(0);" onclick="checkCartItems()"> Cart</a>
         </h5>
     </div>
 
@@ -145,7 +145,7 @@
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-<ul class="nav navbar-nav" style="margin-left: 40px;  margin-top:10px;">
+<ul class="nav navbar-nav" style="margin-left: 40px;  margin-top:10px; background-color:azure">
 
     <li><a class="m_tag active_tab" href="{{url('/')}}">Home</a></li>
 

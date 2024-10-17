@@ -48,7 +48,8 @@
 
 
    </section> --}}
-   <section id="center" class="center_home">
+   <section id="center" class="center_home " style="margin-top: 20px;">
+
     <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
         <!-- Overlay -->
         <div class="overlay"></div>
@@ -64,7 +65,7 @@
         <div class="carousel-inner">
             @foreach($banners as $index => $banner)
                 <div class="item slides {{ $index === 0 ? 'active' : '' }}">
-                    <div class="slide-{{ $index + 1 }}" style="background-image: url('{{ asset('BannerImage/' . $banner->image) }}');"></div>
+                    <div class="slide-{{ $index + 1 }} " style="background-image: url('{{ asset('BannerImage/' . $banner->image) }}');"></div>
                     <div class="hero">
                         <h1 class="mgt">{{ $banner->title }}</h1>
                         <hr>
@@ -75,5 +76,6 @@
             @endforeach
         </div>
     </div>
+
 </section>
 

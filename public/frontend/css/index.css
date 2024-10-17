@@ -8,10 +8,10 @@ Licence: <a href="https://www.templateonweb.com/license">Website Template Licenc
 /*********************center_home****************/
 .fade-carousel {
     position: relative;
-    min-height: 600px;
+    min-height: 400px;
 }
 .fade-carousel .carousel-inner .item {
-    min-height: 600px;
+    min-height: 400px;
 }
 .fade-carousel .carousel-indicators > li {
     margin: 0 4px;
@@ -60,24 +60,24 @@ font-weight:normal;
 	transform: translate3d(-50%,-50%,0);
 }
 .hero_1{
-left:88%!important; 
+left:88%!important;
  }
 
 .fade-carousel .carousel-inner .item .hero {
     opacity: 0;
     -webkit-transition: 2s all ease-in-out .1s;
-       -moz-transition: 2s all ease-in-out .1s; 
-        -ms-transition: 2s all ease-in-out .1s; 
-         -o-transition: 2s all ease-in-out .1s; 
-            transition: 2s all ease-in-out .1s; 
+       -moz-transition: 2s all ease-in-out .1s;
+        -ms-transition: 2s all ease-in-out .1s;
+         -o-transition: 2s all ease-in-out .1s;
+            transition: 2s all ease-in-out .1s;
 }
 .fade-carousel .carousel-inner .item.active .hero {
     opacity: 1;
     -webkit-transition: 2s all ease-in-out .1s;
-       -moz-transition: 2s all ease-in-out .1s; 
-        -ms-transition: 2s all ease-in-out .1s; 
-         -o-transition: 2s all ease-in-out .1s; 
-            transition: 2s all ease-in-out .1s;    
+       -moz-transition: 2s all ease-in-out .1s;
+        -ms-transition: 2s all ease-in-out .1s;
+         -o-transition: 2s all ease-in-out .1s;
+            transition: 2s all ease-in-out .1s;
 }
 
 /********************************/
@@ -99,10 +99,11 @@ left:88%!important;
 /********************************/
 /*       Slides backgrounds     */
 /********************************/
-.fade-carousel .slides .slide-1, 
+.fade-carousel .slides .slide-1,
 .fade-carousel .slides .slide-2,
-.fade-carousel .slides .slide-3 {
-  min-height: 600px;
+.fade-carousel .slides .slide-3,
+.fade-carousel .slides .slide-4 {
+  min-height: 400px;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -118,6 +119,10 @@ left:88%!important;
 .fade-carousel .slides .slide-3 {
       background-image: url(../img/5.jpg);
 	  background-position:center;
+}
+.fade-carousel .slides .slide-4 {
+    background-image: url(../img/5.jpg);
+    background-position:center;
 }
 #center .carousel-indicators{
   bottom:0;
@@ -140,7 +145,7 @@ left:88%!important;
 /*********************list****************/
 #list{
 padding-top:40px;
-padding-bottom:40px; 
+padding-bottom:40px;
  }
 .feature_2_last .btn-success{
 background:#d93d3d;
@@ -166,19 +171,19 @@ margin-top: 30px;
 }
 .list_2i{
 border:1px solid #f4573729;
-padding:20px; 
+padding:20px;
  }
 .list_2{
-margin-top:30px; 
+margin-top:30px;
  }
- 
+
 #list_o{
 padding-top:40px;
-padding-bottom:40px; 
+padding-bottom:40px;
  }
 #list_o_1{
 padding-top:40px;
-padding-bottom:40px; 
+padding-bottom:40px;
  }
 /*********************list_end****************/
 
@@ -188,41 +193,41 @@ box-shadow: 0 0 10px #f4573752;
 padding:10px;
  }
 .price_2{
-margin-top:30px;  
+margin-top:30px;
  }
 /*********************price_end****************/
 
 /*********************popular****************/
 .popular_1i img{
-margin-top:15px; 
+margin-top:15px;
  }
 .popular_1i{
 padding:15px;
 background:#f4573712;
  }
 .popular_1{
-margin-top:30px; 
+margin-top:30px;
  }
 .popular_1i .button_1{
 padding:10px 15px 10px 15px;
  }
 .bg_1{
-background:#f4573729; 
+background:#f4573729;
  }
 /*********************popular_end****************/
 
 /*********************collection****************/
 .collect_1l{
 background:#fff;
-padding:30px 20px; 
+padding:30px 20px;
  }
 #collection_o{
 padding-top:40px;
-padding-bottom:40px; 
+padding-bottom:40px;
 background:#f4573712;
  }
 #collection_o .collect_1ll{
-padding-top:50px; 
+padding-top:50px;
  }
 /*********************collection_end****************/
 
@@ -232,7 +237,7 @@ padding-top:50px;
 }
 .explore_m{
 padding-top:130px;
-padding-bottom:130px; 
+padding-bottom:130px;
 background-color: #080d1526;
  }
 .explore_1l h3:before {
@@ -258,14 +263,14 @@ background-color: #080d1526;
 /*********************list_last****************/
 #list_last{
 padding-top:40px;
-padding-bottom:40px; 
+padding-bottom:40px;
  }
 .list_last_1i span{
 display:inline-block;
 background:#d93d3d;
 color:#fff;
 width:120px;
-height:120px; 
+height:120px;
 border-radius:50%;
 text-align:center;
 line-height:115px;
@@ -273,7 +278,7 @@ font-size:50px;
 border:2px solid #d93d3d;
  }
 .list_last_1i span:hover{
-background:none; 
+background:none;
 color:#d93d3d;
  }
 .list_last_1i {
@@ -294,7 +299,7 @@ width:20%;
 
 @media screen and (max-width : 767px){
 .center_home{
-text-align:center; 
+text-align:center;
  }
 .hero{
 width:100%;
@@ -307,50 +312,50 @@ margin-left:auto;
 display:none;
  }
 #list{
-text-align:center;  
+text-align:center;
  }
 .list_1r{
-text-align:center;  
-margin-top:15px; 
+text-align:center;
+margin-top:15px;
  }
 #price{
-text-align:center; 
+text-align:center;
  }
 .price_2i{
-margin-bottom:15px; 
+margin-bottom:15px;
  }
 .price_2i img{
-margin-top:15px; 
+margin-top:15px;
  }
 #popular{
-text-align:center; 
+text-align:center;
  }
 .popular_1ii h5{
-text-align:center; 
+text-align:center;
  }
 .popular_1i{
-margin-bottom:15px; 
+margin-bottom:15px;
  }
 #list_o_1{
-text-align:center;  
+text-align:center;
  }
 #collection_o{
-text-align:center;  
+text-align:center;
  }
 .collect_1lr{
-margin-top:15px; 
+margin-top:15px;
  }
 .collect_1ln{
-margin-top:15px; 
+margin-top:15px;
  }
 .list_last_1i{
-margin-bottom:15px; 
+margin-bottom:15px;
  }
 }
 
 @media (min-width:768px) and (max-width:991px) {
 .hero_1{
-left:75%!important; 
+left:75%!important;
  }
 .center_home br{
 display:none;
@@ -365,7 +370,7 @@ background-position:center;
  }
 @media (min-width:992px) and (max-width:1200px) {
 .hero_1{
-left:75%!important; 
+left:75%!important;
  }
  }
 @media (min-width:1201px) and (max-width:1220px) {
