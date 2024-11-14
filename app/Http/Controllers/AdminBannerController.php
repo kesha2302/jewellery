@@ -37,8 +37,8 @@ class AdminBannerController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string',
-            'description' => 'required|string',
+            // 'title' => 'required|string',
+            // 'description' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
 
         ]);

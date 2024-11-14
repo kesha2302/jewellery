@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cartsession;
 use App\Models\Checkout;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Razorpay\Api\Api;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -19,6 +21,11 @@ class PaymentController extends Controller
         $totalCost = $request->session()->get('totalAmount');
         $checkoutData = $request->session()->get('checkout_data');
         $cartItems = $request->session()->get('cart', []);
+        $discount = $totalCost * 0.10; // 10% of the total cost
+        $discountedTotalCost = $totalCost - $discount;
+
+
+        Log::info('Handle payment called', ['request_data' => $request->all()]);
 
 
 
@@ -26,7 +33,8 @@ class PaymentController extends Controller
         {
             $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));
             $payment = $api->payment->fetch($request->razorpay_payment_id);
-            $response = $payment->capture(array('amount'=>$totalCost * 100));
+            // $response = $payment->capture(array('amount'=>$totalCost * 100));
+            $response = $payment->capture(array('amount' => $discountedTotalCost * 100));
 
             $productIds = [];
             $productNames = [];
@@ -59,7 +67,8 @@ class PaymentController extends Controller
             $orderItem->product_name = $productNamesStr;
             $orderItem->quantity = $quantitiesStr;
             $orderItem->price = $totalPricesStr;
-            $orderItem->total_cost = $totalCost;
+            // $orderItem->total_cost = $totalCost;
+            $orderItem->total_cost = $discountedTotalCost;
             $orderItem->save();
 
 
@@ -74,15 +83,18 @@ class PaymentController extends Controller
               $checkout->pincode = $checkoutData['pincode'];
               $checkout->contact = $checkoutData['contact_number'];
               $checkout->payment_id = $response['id'];
-              $checkout->total_cost = $totalCost;
+            //   $checkout->total_cost = $totalCost;
+              $checkout->total_cost = $discountedTotalCost;
               $checkout->save();
 
             $email = $user->email;
 
 
-            Mail::send('Frontend.paymentemail', ['user' => $user, 'checkout' => $checkout], function($message) use ($email) {
+            Mail::send('Frontend.paymentemail', ['user' => $user, 'checkout' => $checkout, 'orderItem' => $orderItem], function($message) use ($email) {
                 $message->to($email)->subject('Payment Confirmation');
             });
+
+            Cartsession::where('customer_id', $user->customer_id)->delete();
 
             $request->session()->forget('checkout_data');
             $request->session()->forget('cart');

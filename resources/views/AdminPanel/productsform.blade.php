@@ -60,9 +60,16 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Price:</label>
+                    <label class="form-label">MRP Price:</label>
                     <input type="text" name="price" class="form-control" value="{{$products->price}}"/>
                     @error('price')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Discount Price:</label>
+                    <input type="text" name="discount_price" class="form-control" value="{{$products->discount_price}}"/>
+                    @error('discount_price')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

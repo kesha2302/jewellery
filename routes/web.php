@@ -51,10 +51,13 @@ Route::get('/cart',[CartController::class,'cart'])->name('cart.view');
 Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class,'removeFromCart'])->name('cart.remove');
 Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
+
 
 // Checkout Details
 Route::get('/checkoutpage',[CheckoutController::class,'checkout']);
 Route::post('/checkout-submit', [CheckoutController::class, 'checkoutSubmit'])->name('checkout.submit');
+Route::post('/update-session-total', [CheckoutController::class, 'updateSessionTotal']);
 
 // Route::get('/cart',[CartController::class,'cart']);
 
@@ -68,6 +71,11 @@ Route::get('/edit-profile', [ProfileController::class, 'edit']);
 Route::post('/edit-profile2', [ProfileController::class, 'update']);
 Route::get('/orderhistory',[ProfileController::class, 'orderhistory']);
 
+// Route::delete('/order/{id}/cancel', [ProfileController::class, 'cancel'])->name('order.cancel');
+Route::delete('/order/{order_id}/cancel', [ProfileController::class, 'cancel'])->name('order.cancel');
+
+
+
 
 // Forgot and Reset Password Routes
 Route::get('/forgotpassword',[ForgotpasswordController::class,'forgotpasswordload']);
@@ -78,6 +86,8 @@ Route::post('/resetpasswordset', [ForgotpasswordController::class, 'resetpasswor
 
 // Admin Details
 Route::get('/Admin', [AdminController::class, 'adminhome']);
+// Route::get('/Admin', [AdminController::class, 'adminhome'])->middleware('admin.auth');
+
 Route::get('/Admin_customersdetail', [AdminController::class, 'admincustomerdetail']);
 Route::get('/Adminorder', [AdminController::class, 'adminorder']);
 Route::get('/Admincheckoutdetails', [AdminController::class, 'admincheckout']);

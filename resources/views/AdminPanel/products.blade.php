@@ -46,7 +46,8 @@
                             <th style="width: 10%;">Subcategory</th>
                             <th style="width: 15%;">Name</th>
                             <th style="width: 17%;">Description</th>
-                            <th style="width: 10%;">Price</th>
+                            <th style="width: 10%;">MRP Price</th>
+                            <th style="width: 10%;">Discount Price</th>
                             <th style="width: 10%;">Created_at</th>
                             <th style="width: 10%;">Updated_at</th>
                             <th colspan="2" style="width: 20%;">Action</th>
@@ -81,6 +82,7 @@
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->description }}</td>
                             <td>{{ $product->price }}</td>
+                            <td>{{ $product->discount_price }}</td>
                             <td>{{ $product->created_at }}</td>
                             <td>{{ $product->updated_at }}</td>
                             <td>

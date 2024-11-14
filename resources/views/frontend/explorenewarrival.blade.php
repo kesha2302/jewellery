@@ -25,8 +25,17 @@
                                         <div class="col-sm-3">
                                             <div class="list_2i clearfix mgt-center">
                                                 <a href="#"><img src="{{ asset('productsimg/' . $product->image) }}" class="iw" alt="{{ $product->name }}"></a>
-                                                <h3><i class="fa fa-rupee"></i> {{ $product->price }}</h3>
+
                                                 <h4><a class="col_1" href="#">{{ $product->name }}</a></h4>
+
+                                                <div class="price-section" style="height: 70px;">
+                                                    <h4><i class="fa fa-rupee"></i> {{ $product->price }}</h4>
+                                                @if($product->discount_price)
+                                                    <h6 style="color:#d93d3d;">Discount: <i class="fa fa-rupee"></i> {{ $product->discount_price }}</h6>
+                                                @endif
+                                                    </div>
+
+
                                                 <div class="mt-5">
                                                     <a href="{{ route('product.show', $product->product_id) }}" class="btn btn-primary btn-block" style="background-color: #d93d3d; border:none; margin-top: 20px;">View</a>
                                                 </div>

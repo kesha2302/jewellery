@@ -1,14 +1,12 @@
 @extends('frontend.layout.main')
 @section('main-container')
 
-@if(session('success'))
-{{-- <div class="alert alert-success">
-    {{ session('success') }}
-</div> --}}
+{{-- @if(session('success'))
+
 <script>
     alert("Welcome, {{ session('username') }}!");
 </script>
-@endif
+@endif --}}
 
 
    @php

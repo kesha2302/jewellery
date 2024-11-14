@@ -38,47 +38,7 @@ class AdminProductController extends Controller
         return view('AdminPanel.productsform')->with($data);
     }
 
-    // public function productform(Request $request)
-    // {
 
-    //     $validator = Validator::make($request->all(), [
-    //         'category' => 'required|exists:category,category_id',
-    //         'subcategory' => 'required|exists:subcategory,subcategory_id',
-    //         'name' => 'required|string',
-    //         'description' => 'required|string|max:255',
-    //         'price' => 'required|integer',
-    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif',
-    //         'img1' => 'required|image|mimes:jpeg,png,jpg,gif',
-    //         'img2' => 'required|image|mimes:jpeg,png,jpg,gif',
-    //         'img3' => 'required|image|mimes:jpeg,png,jpg,gif',
-    //         'img4' => 'required|image|mimes:jpeg,png,jpg,gif',
-
-
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return redirect()->back()->withErrors($validator)->withInput();
-    //     }
-
-    //     $product= new Product();
-    //     $product->category_id=$request->input('category');
-    //     $product->subcategory_id=$request->input('subcategory');
-    //     $product->name=$request->input('name');
-    //     $product->description=$request->input('description');
-    //     $product->price = $request->input('price');
-
-    //     if ($request->hasFile('image')) {
-    //         $file=$request->file('image');
-    //         $fileName = time() . "img." . $request->file('image')->getClientOriginalExtension();
-    //         $file->move('productsimg', $fileName);
-    //         $product->image = $fileName;
-    //     }
-
-    //     $product->save();
-
-    //     return redirect('/Adminproduct');
-
-    // }
     public function productform(Request $request)
 {
     $validator = Validator::make($request->all(), [
@@ -87,6 +47,7 @@ class AdminProductController extends Controller
         'name' => 'required|string',
         'description' => 'required|string|max:255',
         'price' => 'required|integer',
+        'discount_price' => 'required|integer',
         'image' => 'required|image|mimes:jpeg,png,jpg,gif',
         'img1' => 'required|image|mimes:jpeg,png,jpg,gif',
         'img2' => 'required|image|mimes:jpeg,png,jpg,gif',
@@ -104,6 +65,7 @@ class AdminProductController extends Controller
     $product->name = $request->input('name');
     $product->description = $request->input('description');
     $product->price = $request->input('price');
+    $product->discount_price = $request->input('discount_price');
 
     // Handling the main image
     if ($request->hasFile('image')) {
@@ -216,6 +178,7 @@ class AdminProductController extends Controller
     $product->name = $request->input('name');
     $product->description = $request->input('description');
     $product->price = $request->input('price');
+    $product->discount_price = $request->input('discount_price');
 
     // Handling the main image
     if ($request->hasFile('image')) {
